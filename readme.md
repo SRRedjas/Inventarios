@@ -1,0 +1,1 @@
+Sistema de Inventarios con laravel 12
