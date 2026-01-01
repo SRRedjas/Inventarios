@@ -23,12 +23,10 @@ return new class extends Migration
 
             //foreigns
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('uom_id');
 
 
             //conect foreigns
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('uom_id')->references('id')->on('uoms');
 
             
         });

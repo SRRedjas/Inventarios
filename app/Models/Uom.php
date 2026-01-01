@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Uom extends Model
 {
@@ -15,9 +16,9 @@ class Uom extends Model
     ];
 
 
-    public function products() : HasMany
+    public function products() : BelongsToMany
     {
-        return $this->hasMany(Product::class);
-   }
+        return $this->belongsToMany(Product::class, $table='uom_product');
+    }
     
 }

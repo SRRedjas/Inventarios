@@ -8,34 +8,46 @@
 <body class="min-h-screen bg-white dark:bg-zinc-800 antialiased">
     <flux:sidebar sticky collapsible class="bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
         <flux:sidebar.header>
-            <x-app-logo/>    
+            <x-app-logo />
             <flux:sidebar.collapse
                 class="in-data-flux-sidebar-on-desktop:not-in-data-flux-sidebar-collapsed-desktop:-mr-2" />
         </flux:sidebar.header>
         <flux:sidebar.nav>
             <flux:sidebar.item icon="home" href="{{ route('dashboard') }}" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:sidebar.item>
             <flux:separator />
-            <flux:sidebar.item icon="document-text" href="#">{{ __('Sales') }}</flux:sidebar.item>
-            <flux:sidebar.group expandable icon="circle-stack" heading="{{ __('Inventory') }}" class="grid" expanded='false'>
-                <flux:sidebar.item href="{{route('products.panel')}}" :current="request()->routeIs('products.panel')">{{ __('Products') }}</flux:sidebar.item>
-                <flux:sidebar.item href="{{route('products.uoms.panel')}}" :current="request()->routeIs('products.uoms.panel')">{{ __('Uoms') }}</flux:sidebar.item>
-                <flux:sidebar.item href="{{route('products.categories.panel')}}" :current="request()->routeIs('products.categories.panel')">{{ __('Categories') }}</flux:sidebar.item>
+
+
+            <flux:sidebar.group expandable icon="banknotes" heading="{{ __('Cashier') }}" class="grid" expanded='false'>
+                <flux:sidebar.item href="{{route('products.panel')}}" :current="request()->routeIs('products.panel')">{{ __('Billing') }}</flux:sidebar.item>
+                <flux:sidebar.item href="{{route('products.panel')}}" :current="request()->routeIs('products.panel')">{{ __('Pagos') }}</flux:sidebar.item>
             </flux:sidebar.group>
-            
-            <flux:sidebar.group expandable icon="arrow-right-start-on-rectangle" heading="{{ __('Inventory Movements') }}" class="grid" expanded='false'>
-                <flux:sidebar.item href="#">{{ __('Entries') }}</flux:sidebar.item>
-                <flux:sidebar.item href="#">{{ __('Outs') }}</flux:sidebar.item>
-                <flux:sidebar.item href="#">{{ __('Transfers') }}</flux:sidebar.item>
+
+            <flux:sidebar.group expandable icon="circle-stack" heading="{{ __('SGA') }}" class="grid" expanded='false'>
+
+                <flux:sidebar.group expandable icon="beaker" heading="{{ __('Products') }}" class="grid" expanded='false'>
+                    <flux:sidebar.item href="{{route('products.panel')}}" :current="request()->routeIs('products.panel')">{{ __('Products') }}</flux:sidebar.item>
+                    <flux:sidebar.item href="{{route('products.uoms.panel')}}" :current="request()->routeIs('products.uoms.panel')">{{ __('Uoms') }}</flux:sidebar.item>
+                    <flux:sidebar.item href="{{route('products.categories.panel')}}" :current="request()->routeIs('products.categories.panel')">{{ __('Categories') }}</flux:sidebar.item>
+                </flux:sidebar.group>
+                <flux:sidebar.group expandable icon="arrow-right-start-on-rectangle" heading="{{ __('Inventory Movements') }}" class="grid" expanded='false'>
+                    <flux:sidebar.item href="#">{{ __('Entries') }}</flux:sidebar.item>
+                    <flux:sidebar.item href="#">{{ __('Outs') }}</flux:sidebar.item>
+                    <flux:sidebar.item href="#">{{ __('Transfers') }}</flux:sidebar.item>
+                </flux:sidebar.group>
+                
+
             </flux:sidebar.group>
+
+
 
             <flux:sidebar.group expandable icon="cog-6-tooth" heading="{{ __('Settings') }}" class="grid" expanded='false'>
                 <flux:sidebar.item href="#">{{ __('Users') }}</flux:sidebar.item>
                 <flux:sidebar.item href="#">{{ __('Roles') }}</flux:sidebar.item>
-                <flux:sidebar.item href="#">{{ __('Transfers') }}</flux:sidebar.item>
+                
             </flux:sidebar.group>
         </flux:sidebar.nav>
         <flux:sidebar.spacer />
-        
+
         <flux:dropdown class="hidden lg:block" position="bottom" align="start">
             <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
                 icon:trailing="chevrons-up-down" data-test="sidebar-menu-button" />

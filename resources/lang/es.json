@@ -63,7 +63,20 @@
     "Roles": "Roles",
     "Uoms": "Unidades de Medida",
     "Inventory": "Inventario",
-    "Categories": "Categorias"
+    "Categories": "Categorias",
+    "Billing": "Facturacion",
+    "WMS": "SGA",
+    "Cashier": "Cajero",
+    "Filters": "Filtros",
+    "Type filter": "Filtro de tipo",
+    "Name filter": "Filtro de nombre",
+    "Symbol filter": "Filtro de simbolo",
+    "Type": "Tipo",
+    "Confirm deletion?": "¿Seguro desea eliminar la unidad de medida?",
+    "Yes, delete": "Sí, eliminar",
+    "No, cancel": "No, cancelar",
+    "Symbol": "Simbolo"
+    
 
 }
 
