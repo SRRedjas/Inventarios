@@ -5,9 +5,11 @@ use App\Models\Uom;
 use Livewire\WithPagination;
 use Livewire\Attributes\On;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
-use Livewire\Livewire;
+
 
 new class extends Component {
+
+    use WithPagination;
 
     public $type;
     public $name;
@@ -102,7 +104,7 @@ new class extends Component {
                     <th class="p-2 text-white">{{__('Type')}}</th>
                     <th class="p-2 text-white">{{__('Symbol')}}</th>
                     <th class="p-2 text-white">{{__('Factor')}}</th>
-                    <th class="p-2 text-white">{{__('Acciones')}}</th>
+                    <th class="p-2 text-white">{{__('Actions')}}</th>
                 </tr>
             </thead>
             <tbody>
