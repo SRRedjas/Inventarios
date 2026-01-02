@@ -17,8 +17,9 @@ return new class extends Migration
             
             //columns
             $table->string('code');
+            $table->string('name');
             $table->string('description');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->boolean('status');
 
             //foreigns

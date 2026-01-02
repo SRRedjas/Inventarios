@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illumiante\Database\Eloquent\BelongTo;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
@@ -14,14 +15,13 @@ class Product extends Model
         'img',
         'description',
         'category_id',
-        'status',
-        'oum_id'
+        'status'
     ];
 
 
-    public function uom(): BelongsTo
+    public function uoms(): BelongsToMany
     {
-        return $this->belongsTo(Uom::class);
+        return $this->belongsToMany(Uom::class, 'uom_product');
     }
 
     public function category(): BelongsTo

@@ -24,6 +24,7 @@ new class extends Component {
         Uom::create($validado);
         LivewireAlert::title('Creado')->text('Unidad de medida creada con exito')->success()->show();
 
+        $this->reset();
         $this->dispatch('uom-created');
 
 

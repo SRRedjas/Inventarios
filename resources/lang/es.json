@@ -76,8 +76,15 @@
     "Yes, delete": "Sí, eliminar",
     "No, cancel": "No, cancelar",
     "Actions": "Acciones",
-    "Symbol": "Simbolo"
-    
+    "Symbol": "Simbolo",
+    "Product": "Producto",
+    "Image": "Imagen",
+    "Code": "Código",
+    "Create": "Crear",
+    "Category": "Categoria",
+    "Choose file": "Seleccione imagen",
+    "No file chosen": "No ha seleccionado ningun archivo",
+    "Description": "Descripción"
 
 }
 

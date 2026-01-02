@@ -22,6 +22,7 @@ new class extends Component {
         Category::create($validado);
         LivewireAlert::title('Creado')->text('Categoria creada con exito')->success()->show();
 
+        $this->reset();
         $this->dispatch('category-created');
 
 
