@@ -29,7 +29,10 @@ new class extends Component {
             ]
         );
 
-        $validated['image'] = $this->image->store(path: 'products');
+        if($this->image){  
+            $validated['img'] = $this->image->store(path: 'products');
+        }
+        
         $validated['status'] =1;
 
 
@@ -39,6 +42,8 @@ new class extends Component {
                         ->text('Recuerde añadir unidades de medida y detalles')
                         ->success()
                         ->show();
+
+        $this->dispatch('product-created');
     }
 
     

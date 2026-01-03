@@ -3,11 +3,14 @@
 use Livewire\Volt\Component;
 use App\Models\Product;
 use Livewire\WithPagination;
+use Livewire\Attributes\On;
 
 new class extends Component {
 
     use WithPagination;
+    
 
+    #[On('product-created')]
     public function with()
     {
         return ['products' => Product::paginate(25)];
