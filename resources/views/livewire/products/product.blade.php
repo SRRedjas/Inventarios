@@ -33,7 +33,7 @@ new class extends Component {
             ]
         );
 
-        dd($validated);
+        
         
         if($this->img){
             $validated["img"] = $this->img->store(path:'products');

@@ -64,6 +64,7 @@
     "Uoms": "Unidades de Medida",
     "Inventory": "Inventario",
     "Categories": "Categorias",
+    "Movement Types": "Tipos de Movimiento",
     "Billing": "Facturacion",
     "WMS": "SGA",
     "Cashier": "Cajero",
@@ -85,9 +86,14 @@
     "Bar code": "Código de barras",
     "Create": "Crear",
     "Category": "Categoria",
+    "Status": "Estado",
+    "Address": "Dirección",
     "Choose file": "Seleccione imagen",
     "No file chosen": "No ha seleccionado ningun archivo",
-    "Description": "Descripción"
+    "Description": "Descripción",
+    "Movement Type": "Tipo de movimiento",
+    "Stores": "Bodegas",
+    "Store": "Bodega"
 
 }
 

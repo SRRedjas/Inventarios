@@ -34,3 +34,4 @@ Route::middleware(['auth'])->group(function () {
 
 
 include  __DIR__.'/products.php';
+include  __DIR__.'/inventories.php';

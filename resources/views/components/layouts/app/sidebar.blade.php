@@ -29,6 +29,10 @@
                     <flux:sidebar.item href="{{route('products.uoms.panel')}}" :current="request()->routeIs('products.uoms.panel')">{{ __('Uoms') }}</flux:sidebar.item>
                     <flux:sidebar.item href="{{route('products.categories.panel')}}" :current="request()->routeIs('products.categories.panel')">{{ __('Categories') }}</flux:sidebar.item>
                 </flux:sidebar.group>
+                <flux:sidebar.group expandable icon="clipboard-document-list" heading="{{ __('Inventory') }}" class="grid" expanded='false'>
+                    <flux:sidebar.item href="{{route('movement-types.panel')}}" :current="request()->routeIs('movement-types.panel')">{{ __('Movement Types') }}</flux:sidebar.item> 
+                    <flux:sidebar.item href="{{route('stores.panel')}}" :current="request()->routeIs('stores.panel')">{{ __('Stores') }}</flux:sidebar.item> 
+                </flux:sidebar.group>
                 <flux:sidebar.group expandable icon="arrow-right-start-on-rectangle" heading="{{ __('Inventory Movements') }}" class="grid" expanded='false'>
                     <flux:sidebar.item href="#">{{ __('Entries') }}</flux:sidebar.item>
                     <flux:sidebar.item href="#">{{ __('Outs') }}</flux:sidebar.item>
@@ -52,7 +56,7 @@
             <flux:profile :name="auth()->user()->name" :initials="auth()->user()->initials()"
                 icon:trailing="chevrons-up-down" data-test="sidebar-menu-button" />
 
-            <flux:menu class="w-[220px]">
+            <flux:menu class="w-55">
                 <flux:menu.radio.group>
                     <div class="p-0 text-sm font-normal">
                         <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">

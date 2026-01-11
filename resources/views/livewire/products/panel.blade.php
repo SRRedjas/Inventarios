@@ -70,5 +70,5 @@ new class extends Component {
         </tbody>
 
     </table>
-
+    {{$products->links()}}
 </div>
