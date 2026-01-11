@@ -12,6 +12,7 @@ new class extends Component {
     use WithFileUploads;
 
     public $code;
+    public $codebar;
     public $name;
     public $description;
     public $image;
@@ -22,6 +23,7 @@ new class extends Component {
         $validated = $this->validate(
             [
                 'code'=>['required','string',Rule::unique('products')],
+                'codebar'=>['nullable','string',Rule::unique('products')],
                 'name'=>'required|string',
                 'description'=>'required|string',
                 'image'=>'nullable|image',
@@ -56,10 +58,16 @@ new class extends Component {
 <div>
     <div class="md:w-1/2 mx-auto flex gap-2 flex-col">
         <h3 class='font-bold text-center'>{{__('Product')}}</h3>
+        
         <flux:field>
-            <flux:label>{{__('Codigo')}}</flux:label>
+            <flux:label>{{__('Code')}}</flux:label>
             <flux:error name='code'></flux:error>
             <flux:input placeholder='ECS1211-1' wire:model="code" />
+        </flux:field>
+        <flux:field>
+            <flux:label> {{__('Bar code')}}</flux:label>
+            <flux:error name='codebar'></flux:error>
+            <flux:input placeholder='1232141' wire:model="codebar" />
         </flux:field>
         <flux:field>
             <flux:label>{{__('Name')}}</flux:label>

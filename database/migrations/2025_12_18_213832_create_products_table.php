@@ -17,6 +17,7 @@ return new class extends Migration
             
             //columns
             $table->string('code');
+            $table->string('codebar')->nullable();
             $table->string('name');
             $table->string('description');
             $table->string('img')->nullable();

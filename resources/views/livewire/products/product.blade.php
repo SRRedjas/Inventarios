@@ -12,6 +12,7 @@ new class extends Component {
     use WithFileUploads;
     public Product $product;
     public $name;
+    public $codebar;
     public $description;
     public $img;
     public $category_id;
@@ -23,6 +24,7 @@ new class extends Component {
         $validated = $this->validate(
             [
                 
+                'codebar'=>'nullable|string',
                 'name'=>'required|string',
                 'description'=>'required|string',
                 'img'=>'nullable|image',
@@ -31,6 +33,7 @@ new class extends Component {
             ]
         );
 
+        dd($validated);
         
         if($this->img){
             $validated["img"] = $this->img->store(path:'products');
@@ -56,6 +59,7 @@ new class extends Component {
     public function mount()
     {
         $this->name = $this->product->name;
+        $this->codebar = $this->product->codebar;
         $this->description = $this->product->description;
         $this->status = $this->product->status;
         $this->category_id = $this->product->category_id;
@@ -78,6 +82,7 @@ new class extends Component {
 
             <flux:separator class="my-2" />
             <div class="flex flex-col gap-2">
+                <flux:input wire:model="codebar" label="CODIGO DE BARRAS" />
                 <flux:input wire:model="name" label="NOMBRE DE PRODUCTO" />
                 <flux:input wire:model="description" label="DESCRIPCION DE PRODUCTO" />
 

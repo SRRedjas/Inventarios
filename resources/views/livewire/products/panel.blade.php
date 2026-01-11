@@ -8,12 +8,26 @@ use Livewire\Attributes\On;
 new class extends Component {
 
     use WithPagination;
-    
+
+    public $code;
+    public $barcode;
+    public $name;    
+    public $description;  
 
     #[On('product-created')]
     public function with()
     {
-        return ['products' => Product::paginate(25)];
+        return ['products' => 
+        Product::when($this->name, function($query){
+            return $query->where('name','like','%'.$this->name.'%');
+        })->when($this->code, function($query){
+            return $query->where('code', 'like', '%'.$this->code.'%');
+        })
+        ->when($this->description, function($query){
+            return $query->where('description', 'like', '%'.$this->description.'%');
+        })
+        ->paginate(10),
+        ];
     }
 }; ?>
 
@@ -21,7 +35,13 @@ new class extends Component {
     <flux:button href="{{route('products.uoms.panel')}}" icon='cube-transparent'>Unidades de medida</flux:button>
     <flux:button href="{{route('products.categories.panel')}}" icon='tag'>Categorias</flux:button>
     <livewire:products.create-form />
-    <flux:separator class="my-2" />
+    <flux:separator class="my-4" />
+
+    <div class='flex flex-col md:flex-row justify-between py-4 gap-2'>
+        <flux:input label='{{__("Name filter")}}' wire:model.live.debounce.500ms='name' />
+        <flux:input label='{{__("Code filter")}}' wire:model.live.debounce.500ms='code' />
+        <flux:input label='{{__("Description filter")}}' wire:model.live.debounce.500ms='description' />
+    </div>
 
     <table class="overflow-x-scroll mx-auto sm:p-4 border md:w-full w-3/4 ">
         <thead class="bg-linear-to-t from-sky-400 to-indigo-400 ">
