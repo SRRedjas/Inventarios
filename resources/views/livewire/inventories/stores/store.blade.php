@@ -19,8 +19,8 @@ new class extends Component {
         $validated = $this->validate(
             [
                 
-                'code'=>['required','string', Rule::unique('stores')],
-                'name'=>['required','string', Rule::unique('stores')],
+                'code'=>['required','string', Rule::unique('stores')->ignore($this->store)],
+                'name'=>['required','string', Rule::unique('stores')->ignore($this->store)],
                 'address'=>'required|string',
                 'status'=>'required|boolean'
             ]

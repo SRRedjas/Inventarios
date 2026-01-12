@@ -11,24 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transfers', function (Blueprint $table) {
+        Schema::create('movements', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
-
-            //columsn 
             
+            $table->date('movement_date');
+            $table->string('correlative', 50)->unique();
             $table->boolean('status');
             $table->string('comments');
 
             //foreigns
             $table->foreignId('user_id');
-            $table->unsignedBigInteger('from');
-            $table->unsignedBigInteger('to');
-            $table->foreign('from')->references('id')->on('stores');
-            $table->foreign('to')->references('id')->on('stores');
-
-            
+            $table->foreignId('store_id');
+            $table->foreignId('movement_type_id');
         });
     }
 
@@ -37,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transfers');
+        Schema::dropIfExists('movements');
     }
 };

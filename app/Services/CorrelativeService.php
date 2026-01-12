@@ -9,25 +9,25 @@ use Illuminate\Support\Str;
 
 class CorrelativoService
 {
-    public function next(string $movementCode, string $warehouseCode, int $year = null): array
+    public function next(string $movementCode, string $storeCode, ?int $year = null): array
     {
         $year = $year ?? now()->year;
 
-        return DB::transaction(function () use ($movementCode, $warehouseCode, $year) {
+        return DB::transaction(function () use ($movementCode, $storeCode, $year) {
             $movementType = MovementType::where('code', $movementCode)->firstOrFail();
-            $warehouse    = Store::where('code', $warehouseCode)->firstOrFail();
+            $store    = Store::where('code', $storeCode)->firstOrFail();
 
             // Bloqueo pesimista para evitar carreras
             $sequence = MovementSequence::where([
                 'movement_type_id' => $movementType->id,
-                'warehouse_id'     => $warehouse->id,
+                'store_id'     => $store->id,
                 'year'             => $year,
             ])->lockForUpdate()->first();
 
             if (!$sequence) {
                 $sequence = MovementSequence::create([
                     'movement_type_id' => $movementType->id,
-                    'warehouse_id'     => $warehouse->id,
+                    'store_id'     => $store->id,
                     'year'             => $year,
                     'current_number'   => 0,
                 ]);
@@ -43,7 +43,7 @@ class CorrelativoService
             // Construcción del correlativo (formato configurable)
             $correlativo = $this->buildCorrelativo(
                 $movementType->code,
-                $warehouse->code,
+                $store->code,
                 $year,
                 $seqNumber
             );
@@ -52,7 +52,7 @@ class CorrelativoService
                 'sequence_number' => $seqNumber,
                 'correlativo'     => $correlativo,
                 'movement_type_id'=> $movementType->id,
-                'warehouse_id'    => $warehouse->id,
+                'store_id'    => $store->id,
                 'year'            => $year,
             ];
         }, 3); // reintentos ante deadlocks

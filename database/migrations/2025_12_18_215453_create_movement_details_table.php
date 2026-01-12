@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transfer_details', function (Blueprint $table) {
+        Schema::create('movement_details', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -23,7 +23,7 @@ return new class extends Migration
 
 
             //foreigns
-            $table->foreignId('transfer_id');
+            $table->foreignId('movement_id');
             $table->foreignId('product_id');
             $table->foreignId('oum_id');
         });

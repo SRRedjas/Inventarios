@@ -93,6 +93,9 @@
     "Description": "Descripción",
     "Movement Type": "Tipo de movimiento",
     "Stores": "Bodegas",
+    "Movements": "Movimientos",
+    "Correlative": "Correlativo",
+    "Date": "Fecha",
     "Store": "Bodega"
 
 }

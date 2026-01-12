@@ -34,6 +34,7 @@
                     <flux:sidebar.item href="{{route('stores.panel')}}" :current="request()->routeIs('stores.panel')">{{ __('Stores') }}</flux:sidebar.item> 
                 </flux:sidebar.group>
                 <flux:sidebar.group expandable icon="arrow-right-start-on-rectangle" heading="{{ __('Inventory Movements') }}" class="grid" expanded='false'>
+                    <flux:sidebar.item :href="route('movements.panel')" :current="request()->routeIs('movements.panel')">{{ __('Movements') }}</flux:sidebar.item>
                     <flux:sidebar.item href="#">{{ __('Entries') }}</flux:sidebar.item>
                     <flux:sidebar.item href="#">{{ __('Outs') }}</flux:sidebar.item>
                     <flux:sidebar.item href="#">{{ __('Transfers') }}</flux:sidebar.item>
