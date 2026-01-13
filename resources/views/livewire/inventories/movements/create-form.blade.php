@@ -1,27 +1,84 @@
 <?php
 
 use Livewire\Volt\Component;
-use App\Services\CorrelativoService;
+use App\Services\CorrelativeService;
 use App\Models\Movement;
 use App\Models\Store;
 use App\Models\MovementType;
 use App\Models\Transfer;
+use Carbon\Carbon;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
+use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
     public $type;
 
-    public $movementType;
+    public $movement_code;
     public $correlative;
-    public $store;
+    public $store_code;
+    public $movement_date;
+    public $comments;
+    
+
+    //filtros
     public $storeFilter;
+
+    public function mount()
+    {
+        $this->movement_date = Carbon::now()->format('Y-m-d');
+    }
 
     public function selectStore($id)
     {
-        $tienda = Store::find($id);
+        $store = Store::find($id);
 
-        $this->store = $tienda->code;
+        $this->store_code = $store->code;
     }
 
+    public function createMovement(CorrelativeService $svc)
+    {
+        
+
+        $validated = $this->validate([
+            'movement_date' => 'required|date',
+            'comments' => 'required|string',
+            'movement_code' => 'required|string',
+            'store_code' =>'required|string',
+
+
+        ]);
+
+
+
+
+        
+         $movementData = $svc->next( $validated['movement_code'], $validated['store_code'], (int)date('Y', strtotime($validated['movement_date']))); 
+
+         $this->correlative= $movementData['correlative'];
+        
+
+        //'correlative', 'status', 'comments', 'user_id', 'store_id', 'movement_type_id'
+         
+        Movement::create([ 
+            'correlative'=>$movementData['correlative'],
+            'status'=>'P',
+            'comments'=>$validated['comments'],
+            'movement_date'=>$validated['movement_date'],
+            'user_id'=>Auth::user()->id,
+            'store_id'=>$movementData['store_id'],
+            'movement_type_id'=>$movementData['movement_type_id']
+         ]);
+
+        LivewireAlert::title('Correlativo creado')
+                        ->success()
+                        ->show();
+
+
+        $this->redirectRoute('movements.edit',['corr'=>$this->correlative]);
+
+
+
+    }
     public function with()
     {
         return [
@@ -49,11 +106,11 @@ new class extends Component {
     <div class="p-2 my-2 border-b ">
         @if ($type == 'm')
             <flux:field>
-                <flux:error name="movementType" />
+                <flux:error name="movement_code" />
                 <flux:label>
                     Seleccione tipo de movimiento:
                 </flux:label>
-                <flux:select>
+                <flux:select wire:model="movement_code">
                     <flux:select.option value="">Seleccione un tipo de movimiento</flux:option>
                         @foreach ($movement_types as $movement_type)
                             <flux:select.option value="{{ $movement_type->code }}">{{ $movement_type->code }} -
@@ -65,13 +122,22 @@ new class extends Component {
 
             </flux:field>
             <flux:field>
-                <flux:error name="Store" />
+                <flux:error name="movement_date" />
+                <flux:label>
+                    Fecha de Movimiento
+                </flux:label>
+
+                <flux:input type="movement_date" wire:model="movement_date" />
+            </flux:field>
+            <flux:field>
+                <flux:error name="store_code" />
                 <flux:label>
                     Bodega
                 </flux:label>
 
-                <div class="flex">
-                    <flux:input wire:model="store" />
+
+                <div class="flex gap-4 md:w-1/4">
+                    <flux:input wire:model="store_code" />
                     <flux:modal.trigger name="search-store">
                         <flux:button icon="magnifying-glass">Buscar Bodega</flux:button>
                     </flux:modal.trigger>
@@ -94,12 +160,21 @@ new class extends Component {
             </flux:field>
 
             <flux:field>
-                <flux:error name="Correlative" />
+                <flux:error name="comments" />
+                <flux:label>
+                    Observaciones
+                </flux:label>
+                <flux:textarea wire:model="comments" />
+            </flux:field>
+
+            <flux:button wire:click="createMovement">Generar correlativo</flux:button>
+
+            <flux:field>
+                <flux:error name="correlative" />
                 <flux:label>
                     Correlativo
                 </flux:label>
                 <flux:input wire:model="correlative" readonly />
-
             </flux:field>
         @elseif($type == 't')
             Seleccione bodega de salida

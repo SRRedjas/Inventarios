@@ -7,7 +7,7 @@ use App\Models\Store;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class CorrelativoService
+class CorrelativeService
 {
     public function next(string $movementCode, string $storeCode, ?int $year = null): array
     {
@@ -50,7 +50,7 @@ class CorrelativoService
 
             return [
                 'sequence_number' => $seqNumber,
-                'correlativo'     => $correlativo,
+                'correlative'     => $correlativo,
                 'movement_type_id'=> $movementType->id,
                 'store_id'    => $store->id,
                 'year'            => $year,

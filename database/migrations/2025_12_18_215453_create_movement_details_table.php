@@ -18,7 +18,7 @@ return new class extends Migration
 
             //columsn 
             $table->decimal('amount', 10,4);
-            $table->decimal('transfer_amount', 10,4);
+            $table->decimal('movement_amount', 10,4);
             $table->decimal('cost', 10,4);
 
 
